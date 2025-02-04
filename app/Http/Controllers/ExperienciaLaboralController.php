@@ -1,0 +1,53 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\ExperienciaLaboral;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+
+class ExperienciaLaboralController extends Controller
+{
+    public function create()
+{
+    return view('vistas.Habilidades'); //esto hace que mande ala vista del 3er formulario
+}
+    
+    public function store(Request $request)
+    {
+        try {
+        
+        $request->validate([
+            'nivel_educativo' => 'nullable|string|max:255',
+            'titulo_empleado' => 'nullable|string|max:255',
+            'empresa_actual' => 'nullable|string|max:255',
+            'cargo_actual' => 'nullable|string|max:255',
+            'descripcion_responsabilidades' => 'nullable|string|max:1000',
+        ]);
+
+        
+        $experiencia = new ExperienciaLaboral();
+        $experiencia->nivel_educativo = $request->nivel_educativo;
+        $experiencia->titulo_empleado = $request->titulo_empleado;
+        $experiencia->empresa_actual = $request->empresa_actual;
+        $experiencia->cargo_actual = $request->cargo_actual;
+        $experiencia->descripcion_responsabilidades = $request->descripcion_responsabilidades;
+
+        $experiencia->save();
+
+        
+        if ($experiencia->save()) {
+            return redirect()->route('Habilidades')->with('success', 'Datos guardados correctamente');
+
+
+        } else {
+            return back()->with('error', 'Error al guardar los datos');
+ 
+        }
+    } catch (\Exception $e) {
+        Log::error('Error al guardar: ' . $e->getMessage());
+        return back()->with('error', 'Ocurrió un error inesperado.');
+    }
+    }
+
+}
