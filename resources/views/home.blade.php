@@ -14,7 +14,10 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                    <!-- Texto en el centro -->
+                    <div class="text-center">
+                        <h3>{{ __('You are logged in!') }}</h3>
+                    </div>
                 </div>
             </div>
         </div>
