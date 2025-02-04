@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FormacionController;
 use App\Http\Controllers\FormAcademcontroller;
 use App\Http\Controllers\ExperienciaLaboralController;
-use App\Http\Controllers\HabilidadesController;
+use App\Http\Controllers\AdminController;
 
 
 Route::get('/', function () {
@@ -29,6 +29,9 @@ Route::post('/Habilidades/store', [ExperienciaLaboralController::class, 'store']
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-//realizamos una prueba
 
-//prueba numero 2
+Route::post('/admin/assign-role', [AdminController::class, 'assignRole'])->name('admin.assignRole');
+
+Route::get('/admin/dashboard', function () {
+    return view('admin.dashboard');
+})->middleware('admin');
