@@ -5,7 +5,7 @@
     <div class="card w-100 shadow-lg p-4">
         <div class="card-body">
             <h5 class="card-title">Habilidades</h5>
-            <form method="POST" action="{{ route('Habilidades.store') }}">
+            <form method="POST" action="{{ route('habilidades.store') }}">
 
                 @csrf
                 <div class="form-group">

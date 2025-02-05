@@ -32,7 +32,7 @@ class HabilidadesController extends Controller
 
         
         if ($habilidades->save()) {
-            return redirect()->route('Habilidades')->with('success', 'Datos guardados correctamente');
+            return redirect()->route('habilidades')->with('success', 'Datos guardados correctamente');
         } else {
             return back()->with('error', 'Error al guardar los datos');
  

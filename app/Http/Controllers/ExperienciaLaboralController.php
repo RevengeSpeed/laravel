@@ -10,7 +10,8 @@ class ExperienciaLaboralController extends Controller
 {
     public function create()
 {
-    return view('vistas.Habilidades'); //esto hace que mande ala vista del 3er formulario
+    return view('vistas.Experiencia');
+ 
 }
     
     public function store(Request $request)
@@ -37,7 +38,7 @@ class ExperienciaLaboralController extends Controller
 
         
         if ($experiencia->save()) {
-            return redirect()->route('Habilidades')->with('success', 'Datos guardados correctamente');
+            return redirect()->route('habilidades')->with('success', 'Datos guardados correctamente');
 
 
         } else {
