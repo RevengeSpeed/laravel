@@ -32,7 +32,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::post('/admin/assign-role', [AdminController::class, 'assignRole'])->name('admin.assignRole');
 
 
-
+//esto llama todo lo de la bd y lo mando a una vista
+Route::get('/curriculum', [FormAcademController::class, 'mostrarCV'])->name('curriculum');
 
 Route::get('/admin/dashboard', function () {
     return view('admin.dashboard');
