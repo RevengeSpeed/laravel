@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MostrarCVS;
 use App\Models\FormAcadem;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FormacionController;
@@ -34,6 +35,11 @@ Route::post('/admin/assign-role', [AdminController::class, 'assignRole'])->name(
 
 //esto llama todo lo de la bd y lo mando a una vista
 Route::get('/curriculum', [FormAcademController::class, 'mostrarCV'])->name('curriculum');
+
+//VISTA PARA MOSTRAR LOS CVS DESDE EL USUARIO DE LA EMPRESA
+
+Route::get('/mostrar-cvs', [MostrarCVS::class, 'MostrarCVS'])->name('vistas.MostrarCVS');
+
 
 Route::get('/admin/dashboard', function () {
     return view('admin.dashboard');

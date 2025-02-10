@@ -16,8 +16,14 @@
 
                     <!-- Texto en el centro -->
                     <div class="text-center">
-                        <h3>{{ __('Bienvenido Administrador!') }}</h3>
+                        <h3>{{ __('Bienvenido!') }}</h3>
+                        <a href="{{ route('vistas.MostrarCVS') }}">
+                            <button type="button" class="btn btn-primary">Mirar CVS</button>
+                        </a>
                     </div>
+
+
+
                 </div>
             </div>
         </div>
