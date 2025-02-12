@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\ExperienciaLaboral;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class ExperienciaLaboralController extends Controller
 {
+    use HasFactory;
     public function create()
 {
     return view('vistas.Experiencia');
@@ -51,4 +54,8 @@ class ExperienciaLaboralController extends Controller
     }
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

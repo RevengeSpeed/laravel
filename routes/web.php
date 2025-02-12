@@ -8,6 +8,7 @@ use App\Http\Controllers\FormAcademcontroller;
 use App\Http\Controllers\ExperienciaLaboralController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HabilidadesController;
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -39,6 +40,7 @@ Route::get('/curriculum', [FormAcademController::class, 'mostrarCV'])->name('cur
 //VISTA PARA MOSTRAR LOS CVS DESDE EL USUARIO DE LA EMPRESA
 
 Route::get('/mostrar-cvs', [MostrarCVS::class, 'MostrarCVS'])->name('vistas.MostrarCVS');
+Route::get('/mostrar-cvs/{id}', [MostrarCVS::class, 'show'])->name('vistas.InformacionUsuarioCVS');
 
 
 Route::get('/admin/dashboard', function () {

@@ -17,6 +17,7 @@ class HabilidadesController extends Controller
         try {
         // Validación de los datos del segundo formulario de habilidades laboral
         $request->validate([
+            'user_id',
             'habilidades_tecnicas' => 'nullable|string|max:255',
             'habilidades_blandas' => 'nullable|string|max:255',
             'idiomas' => 'nullable|string|max:255'

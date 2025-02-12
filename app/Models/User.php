@@ -43,4 +43,27 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function formAcadem()
+{
+    return $this->hasOne(FormAcadem::class, 'user_id');
+}
+
+public function habilidades()
+{
+    return $this->hasOne(Habilidades::class, 'id');
+}
+
+public function formacionAcademica()
+{
+    return $this->hasOne(FormacionAcademica::class, 'id');
+}
+
+public function experienciaLaboral()
+{
+    return $this->hasOne(ExperienciaLaboral::class, 'id');
+}
+
+
+
 }

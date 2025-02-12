@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\FormacionAcademica;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class FormacionController extends Controller
 {
+    use HasFactory;
     public function crear()
     {
         return view('vistas.crear'); // Vista para el primer formulario
@@ -54,5 +57,9 @@ class FormacionController extends Controller
         }
     }
     
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
     
 }

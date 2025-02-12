@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Habilidades extends Model
 {
+    use HasFactory;
     protected $table = 'habilidades';
 
     protected $fillable = [
@@ -16,6 +17,11 @@ class Habilidades extends Model
        
     ];
         public $timestamps = false;
+
+        public function user()
+        {
+            return $this->belongsTo(User::class, 'user_id');
+        }
     }
     
 
