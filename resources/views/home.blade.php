@@ -17,13 +17,13 @@
                     <!-- Texto en el centro -->
                     <div class="text-center">
                         <h3>{{ __('Bienvenido') }}</h3>
-                        <h5>Presione el siguiente botón para continuar hacia su CV</h5>
-                        <!-- Enlace con el botón -->
-                        <a href="{{ route('vistas.crear') }}">
-                            <button type="button" class="btn btn-primary">Continuar</button>
+                        <h5>{{ __('Presione el siguiente botón para continuar hacia su CV') }}</h5>
+
+                        <!-- Enlace con el botón, ahora solo un enlace con estilo de botón -->
+                        <a href="{{ route('vistas.crear') }}" class="btn btn-primary" role="button">
+                            {{ __('Continuar') }}
                         </a>
                     </div>
-
 
                 </div>
             </div>

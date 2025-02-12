@@ -2,7 +2,7 @@
 
 <footer>
 
-    <h1>Hello world</h1>
+    <h1>@UES</h1>
 </footer>
 
 </body>

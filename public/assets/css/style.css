@@ -1,8 +1,237 @@
-form{
-    background-image: url(/resources/views/layouts/assets/UES2024.png);
+/* General body and flex layout adjustments */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif; /* Fuente global */
+    background-image: url('/resources/'); /* Imagen de fondo */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    background-attachment: fixed; /* Fija la imagen en su lugar mientras se desplaza */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Hace que el body ocupe toda la pantalla */
+    line-height: 1.5;
+    color: white; /* Cambiar el color de texto por defecto para contrastar */
+}
+
+/* Asegurarnos de que el contenido sea legible sobre la imagen */
+#app {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Permite que el contenido crezca y empuje el footer al fondo */
+    background-color: transparent; /* Asegura que el fondo del contenedor principal sea transparente */
+}
+
+main {
+    flex-grow: 1;
+}
+
+/* Estilo de los formularios */
+form {
+    background-color: rgba(255, 255, 255, 0.9); /* Fondo semi-transparente para formularios */
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Espacio entre los campos */
+form .form-group {
+    margin-bottom: 1.5rem; /* Espacio entre los campos del formulario */
+}
+
+/* Campos de formulario */
+form input, form select, form textarea, form button {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    margin-top: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background-color: #fff;
+}
+
+form input:focus, form select:focus, form textarea:focus {
+    border-color: #ff7300; /* Naranja para el foco */
+    outline: none;
+    box-shadow: 0 0 8px rgba(255, 115, 0, 0.5);
+}
+
+/* Botón de login */
+form button, .btn-primary {
+    background-color: #ff7300 !important; /* Naranja */
+    color: white !important;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 8px;
+}
+
+/* Hover */
+form button:hover, .btn-primary:hover {
+    background-color: #e66a00 !important; /* Naranja más oscuro */
+}
+
+/* Estado deshabilitado del botón */
+form button:disabled, .btn-primary:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Header */
+header {
+    background-color: #641e09; /* Guinda */
+    background-image: url('/public/assets/images/logo.png'); /* Ruta de la imagen de fondo */
+    background-position: left center; /* Coloca la imagen en el lado izquierdo */
+    background-size: 100px 100px; /* Ajusta el tamaño de la imagen (anchura y altura en píxeles) */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    color: white;
     padding: 20px;
-    border-radius: 10px;
+    text-align: center;
+    border-radius: 8px;
+    margin-top: auto; /* Empuja el header hacia abajo */
+}
+header img.header-logo {
+    width: 70px; /* Ajusta el tamaño de la imagen */
+    height: auto; /* Mantiene la relación de aspecto */
+    margin-right: -800px; /* Espacio entre la imagen y el texto */
+    transition: transform 0.3s ease; /* Agrega una animación para el hover */
+    
+}
+.logo-text {
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-left: 10px; /* Espacio entre la imagen y el texto */
+}
+
+
+
+
+
+header a {
+    color: white;
+    font-size: 1.25rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+header a:hover {
+    color: #ff7300; /* Naranja */
+}
+
+/* Footer */
+footer {
+    background-color: #ff7300; /* Naranja */
+    color: white;
+    text-align: center;
+    padding: 15px;
+    margin-top: auto; /* Empuja el footer hacia abajo */
+    border-radius: 8px;
+}
+
+/* Cuerpo de la página */
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.card {
+    background-color: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    form {
+        padding: 20px;
+    }
+
+    header a {
+        font-size: 1rem;
+    }
+
+    .card {
+        padding: 15px;
+    }
+
+    /* Botón más grande en móviles */
+    form button, .btn-primary {
+        font-size: 1.1rem; /* Hace el botón un poco más grande */
+        padding: 12px 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    header a {
+        font-size: 0.9rem;
+    }
+
+    .btn-primary {
+        width: 100%; /* Los botones ocupan todo el ancho */
+    }
+
+    form input, form select, form textarea, form button {
+        padding: 10px;
+    }
+
+    form {
+        padding: 15px;
+    }
+}
+
+/* Estilo para los enlaces con la clase .btn-primary */
+a.btn-primary {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 8px;
+    text-decoration: none;
+}
+
+a.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+/* Fuente global para todo el sitio */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f7fc; /* Mantén tu color de fondo o ajusta según lo desees */
+}
+
+/* Asegurarse de que las etiquetas <h1>, <h2>, <h3>, etc., también usen esta fuente */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Estilo atractivo para los textos */
+p, li, label, input, button {
+    font-family: 'Poppins', sans-serif;
+}
+@media (max-width: 768px) { 
+    .logo-text {
+        display: none; /* Oculta el texto en pantallas pequeñas */
+    }
 }
