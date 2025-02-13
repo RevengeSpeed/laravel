@@ -5,21 +5,28 @@ namespace App\Http\Controllers;
 use App\Models\FormacionAcademica;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth; // Importar Auth correctamente
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
 class FormacionController extends Controller
 {
     use HasFactory;
+
+    public function __construct()
+    {
+        $this->middleware("auth");
+    }
+
     public function crear()
     {
         return view('vistas.crear'); // Vista para el primer formulario
     }
+
     public function formacionAcademica()
     {
         return view('vistas.formacadem'); // Asegúrate de que esta vista exista
     }
-    
+
     public function store(Request $request)
     {
         try {
@@ -34,7 +41,7 @@ class FormacionController extends Controller
                 'Genero' => 'required|string|max:255',
                 'FechaNacimiento' => 'required|date',
             ]);
-    
+
             // Guardar los datos del primer formulario
             $formacion = new FormacionAcademica();
             $formacion->Nombre = $request->Nombre;
@@ -45,7 +52,8 @@ class FormacionController extends Controller
             $formacion->Telefono = $request->Telefono;
             $formacion->Genero = $request->Genero;
             $formacion->FechaNacimiento = $request->FechaNacimiento;
-    
+            $formacion->user_id = Auth::id(); // Asociar con el usuario logueado
+
             if ($formacion->save()) {
                 return redirect()->route('formacion-academica')->with('success', 'Datos guardados correctamente');
             } else {
@@ -56,10 +64,22 @@ class FormacionController extends Controller
             return back()->with('error', 'Ocurrió un error inesperado.');
         }
     }
-    
-    public function user()
+
+    public function mostrarCVS()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        $usuarioLogueado = Auth::user();
+
+        if (!$usuarioLogueado) {
+            return redirect()->route('login')->with('error', 'Debe iniciar sesión.');
+        }
+
+        $datosFormacion = FormacionAcademica::where('user_id', $usuarioLogueado->id)->get();
+
+        return view('vistas.vistacvusuario', compact('datosFormacion'));
     }
-    
+
+
+
+
+
 }
