@@ -13,54 +13,52 @@ class FormAcademcontroller extends Controller
     }
 
     public function store(Request $request)
-{
-    try {
-        $request->validate([
-            'nivel_educativo' => 'required|string|max:255',
-            'institucion' => 'nullable|string|max:255',
-            'carrera' => 'nullable|string|max:255',
-            'titulo' => 'nullable|in:obtenido,en-curso',
-            'certificaciones' => 'nullable|string|max:255',
-        ]);
+    {
+        try {
+            $request->validate([
+                'nivel_educativo' => 'required|string|max:255',
+                'institucion' => 'nullable|string|max:255',
+                'carrera' => 'nullable|string|max:255',
+                'titulo' => 'nullable|in:obtenido,en-curso',
+                'certificaciones' => 'nullable|string|max:255',
+            ]);
 
-        // Crear un nuevo registro de formación
-        $formacion = new FormAcadem();
-        $formacion->nivel_educativo = $request->nivel_educativo;
-        $formacion->institucion = $request->institucion;
-        $formacion->carrera = $request->carrera;
-        $formacion->titulo = $request->titulo;
-        $formacion->certificaciones = $request->certificaciones;
-        
-        // Aquí asignamos el id del usuario logueado
-        $formacion->user_id = auth()->user()->id;  // Asociamos el usuario con el ID
+            // Crear un nuevo registro de formación
+            $formacion = new FormAcadem();
+            $formacion->nivel_educativo = $request->nivel_educativo;
+            $formacion->institucion = $request->institucion;
+            $formacion->carrera = $request->carrera;
+            $formacion->titulo = $request->titulo;
+            $formacion->certificaciones = $request->certificaciones;
 
-        // Guardar los datos
-        $formacion->save();
+            // Aquí asignamos el id del usuario logueado
+            $formacion->user_id = auth()->user()->id;  // Asociamos el usuario con el ID
 
-        return redirect()->route('experiencia-laboral')->with('success', 'Datos guardados correctamente');
-    } catch (\Exception $e) {
-        Log::error('Error al guardar: ' . $e->getMessage());
-        return back()->with('error', 'Ocurrió un error inesperado.');
+            // Guardar los datos
+            $formacion->save();
+
+            return redirect()->route('experiencia-laboral')->with('success', 'Datos guardados correctamente');
+        } catch (\Exception $e) {
+            Log::error('Error al guardar: ' . $e->getMessage());
+            return back()->with('error', 'Ocurrió un error inesperado.');
+        }
     }
-}
+    public function mostrarCV()
+    {
+        $usuarioLogueado = auth()->user();
+        $datos = FormAcadem::where('user_id', $usuarioLogueado->id)->get();
 
-public function mostrarCV()
-{
-    // Obtener el usuario logueado
-    $usuarioLogueado = auth()->user();
+       
 
-    // Filtrar los datos para que solo se obtenga la información del usuario logueado
-    $datos = FormAcadem::where('user_id', $usuarioLogueado->id)->get();
-
-    // Pasar los datos a la vista
-    return view('vistas.vistacvusuario', compact('datos'));
-}
+        return view('vistas.vistacvusuario', compact('datos'));
+    }
 
 
-public function __construct()
-{
-    $this->middleware('auth');  // Asegura que solo los usuarios autenticados puedan acceder a esta función
-}
+
+    public function __construct()
+    {
+        $this->middleware('auth');  // Asegura que solo los usuarios autenticados puedan acceder a esta función
+    }
 
 
 
