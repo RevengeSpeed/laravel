@@ -21,6 +21,7 @@ return new class extends Migration
     }
 
     /**
+     * jotolon
      * Reverse the migrations.
      */
     public function down(): void
