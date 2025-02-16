@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Información de {{ $user->name }}</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style></style>
 </head>
 <body>
     <div class="container mt-4">
@@ -16,6 +17,7 @@
                 @else
                     <div class="img-placeholder mb-3">Sin Imagen</div>
                 @endif
+                
                 <h5 class="card-title">{{ $user->name }}</h5>
                 <p class="card-text"><strong>Email:</strong> {{ $user->email }}</p>
                 <p class="card-text"><strong>Nacionalidad:</strong> {{ $user->formacionAcademica->nacionalidad ?? 'N/A' }}</p>
