@@ -51,7 +51,7 @@ class User extends Authenticatable
 
 public function habilidades()
 {
-    return $this->hasOne(Habilidades::class, 'id');
+    return $this->hasOne(Habilidades::class, 'id', 'id');
 }
 
 public function formacionAcademica()
