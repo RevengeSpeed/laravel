@@ -42,6 +42,9 @@ Route::get('/curriculum', [FormAcademController::class, 'mostrarCV'])->name('cur
 Route::get('/mostrar-cvs', [MostrarCVS::class, 'MostrarCVS'])->name('vistas.MostrarCVS');
 Route::get('/mostrar-cvs/{id}', [MostrarCVS::class, 'show'])->name('vistas.InformacionUsuarioCVS');
 
+//Mostrar CVS del usuario logeado
+Route::get('/vistacvs', [MostrarCVS::class, 'showAuthenticatedUser'])->name('vistas.vistacvusuario');
+
 
 Route::get('/admin/dashboard', function () {
     return view('admin.dashboard');
