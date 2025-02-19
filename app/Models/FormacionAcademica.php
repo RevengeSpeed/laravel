@@ -8,17 +8,25 @@ use Illuminate\Database\Eloquent\Model;
 class FormacionAcademica extends Model
 {
     use HasFactory;
+
     protected $table = 'formacionacademica';
 
-protected $fillable = [
-    'Nombre', 
-    'Apellido', 
-    'Nacionalidad', 
-    'Direccion', 
-    'Correo', 
-    'Telefono', 
-    'Genero', 
-    'FechaNacimiento',
-];
+    protected $fillable = [
+        'Nombre', 
+        'Apellido', 
+        'Nacionalidad', 
+        'Direccion', 
+        'Correo', 
+        'Telefono', 
+        'Genero', 
+        'FechaNacimiento',
+    ];
+
     public $timestamps = false;
+
+    // Relación con User
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

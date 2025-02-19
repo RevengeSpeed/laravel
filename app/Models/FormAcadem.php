@@ -8,20 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class FormAcadem extends Model
 {
     use HasFactory;
+
     protected $table = 'formacadem';
 
-protected $fillable = [
-    'nivel_educativo',
-    'institucion',
-    'carrera',
-    'titulo',
-    'certificaciones',
-];
-    public $timestamps = false;
+    protected $fillable = [
+        'nivel_educativo',
+        'institucion',
+        'carrera',
+        'titulo',
+        'certificaciones',
+    ];
 
     public function user()
-{
-    return $this->belongsTo(User::class, 'user_id');
-}
-
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

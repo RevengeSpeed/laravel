@@ -45,23 +45,23 @@ class User extends Authenticatable
     ];
 
     public function formAcadem()
-{
-    return $this->hasOne(FormAcadem::class, 'user_id');
-}
+    {
+        return $this->hasOne(FormAcadem::class, 'user_id');
+    }
 
 public function habilidades()
 {
-    return $this->hasOne(Habilidades::class, 'id', 'id');
+    return $this->hasOne(Habilidades::class, 'user_id', 'id');
 }
 
 public function formacionAcademica()
 {
-    return $this->hasOne(FormacionAcademica::class, 'id');
+    return $this->hasOne(FormacionAcademica::class, 'user_id');
 }
 
 public function experienciaLaboral()
 {
-    return $this->hasOne(ExperienciaLaboral::class, 'id');
+    return $this->hasMany(ExperienciaLaboral::class, 'user_id');
 }
 
 

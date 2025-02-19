@@ -33,13 +33,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::post('/admin/assign-role', [AdminController::class, 'assignRole'])->name('admin.assignRole');
 
-
-//esto llama todo lo de la bd y lo mando a una vista
-Route::get('/curriculum', [FormAcademController::class, 'mostrarCV'])->name('curriculum');
-
-//VISTA PARA MOSTRAR LOS CVS DESDE EL USUARIO DE LA EMPRESA.
-
+//MOSTRAR CVS TODOS LOS USUARIOS
 Route::get('/mostrar-cvs', [MostrarCVS::class, 'MostrarCVS'])->name('vistas.MostrarCVS');
+//MOSTRAR CV DEL USUARIO SELECCIONADO
 Route::get('/mostrar-cvs/{id}', [MostrarCVS::class, 'show'])->name('vistas.InformacionUsuarioCVS');
 
 //Mostrar CVS del usuario logeado
