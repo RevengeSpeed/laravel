@@ -45,3 +45,7 @@ Route::get('/vistacvs', [MostrarCVS::class, 'showAuthenticatedUser'])->name('vis
 Route::get('/admin/dashboard', function () {
     return view('admin.dashboard');
 })->middleware('admin');
+
+Route::get('/admin/dashboard', function () {
+    return view('admin.dashboard');
+})->name('admin.dashboard');

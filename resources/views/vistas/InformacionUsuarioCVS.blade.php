@@ -13,6 +13,75 @@
     </title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
+<style>
+    body {
+        background-color: #f8f9fa;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #343a40;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: auto;
+    }
+
+    .card {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border: none;
+        border-radius: 10px;
+    }
+
+    .card-body {
+        padding: 2rem;
+    }
+
+    .card-title {
+        font-size: 1.8rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+
+    .card-text strong {
+        display: inline-block;
+        width: 150px;
+        color: #495057;
+    }
+
+    .user-image {
+        width: 120px;
+        height: 120px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 3px solid #0d6efd;
+        margin-bottom: 1rem;
+    }
+
+    .img-placeholder {
+        width: 120px;
+        height: 120px;
+        background-color: #dee2e6;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #6c757d;
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+    }
+
+    h5.mt-4 {
+        margin-top: 2rem !important;
+        font-size: 1.5rem;
+        border-bottom: 2px solid #0d6efd;
+        padding-bottom: 0.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .card-text {
+        margin-bottom: 0.75rem;
+    }
+</style>
+
 <body>
     <div class="container mt-4">
         <h2 class="mb-4">Información del egresado</h2>
@@ -60,6 +129,8 @@
             </div>
         </div>
     </div>
+    <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary mb-3">⬅ Volver al Dashboard</a>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
