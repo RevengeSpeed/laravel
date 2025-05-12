@@ -9,6 +9,7 @@ use App\Http\Controllers\ExperienciaLaboralController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HabilidadesController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\DocumentoController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -49,3 +50,20 @@ Route::get('/admin/dashboard', function () {
 Route::get('/admin/dashboard', function () {
     return view('admin.dashboard');
 })->name('admin.dashboard');
+
+
+// Listado de documentos
+Route::get('/documentos', [DocumentoController::class, 'index'])
+    ->name('documentos.index');
+
+// Formulario
+Route::get('/documentos/create', [DocumentoController::class, 'create'])
+    ->name('documentos.create');
+
+// Guardado
+Route::post('/documentos', [DocumentoController::class, 'store'])
+    ->name('documentos.store');
+
+
+
+Route::get('/mi-cv', [MostrarCVS::class, 'showAuthenticatedUser'])->name('vistas.vistacvusuario');

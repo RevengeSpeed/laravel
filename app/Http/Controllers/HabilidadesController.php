@@ -32,7 +32,8 @@ class HabilidadesController extends Controller
             $habilidades->idiomas = $request->idiomas;
 
             if ($habilidades->save()) {
-                return redirect()->route('vistas.vistacvusuario')->with('success', '¡Solicitud completada!');
+                return redirect()->route('documentos.create')->with('success', '¡Habilidades guardadas! Continúa con la carga de documentos.');
+
             } else {
                 return back()->with('error', 'Error al guardar los datos');
             }
