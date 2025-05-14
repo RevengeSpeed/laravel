@@ -23,6 +23,10 @@
                         <a href="{{ route('vistas.crear') }}" class="btn btn-primary" role="button">
                             {{ __('Continuar') }}
                         </a>
+
+                        <a href="{{ route('vistas.createpracticas') }}" class="btn-primary" role="button">
+                            {{ __('Crear Practicas') }}
+                        </a>
                     </div>
 
                 </div>

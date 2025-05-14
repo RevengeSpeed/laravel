@@ -10,6 +10,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HabilidadesController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DocumentoController;
+use App\Http\Controllers\PracticasController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -67,3 +68,13 @@ Route::post('/documentos', [DocumentoController::class, 'store'])
 
 
 Route::get('/mi-cv', [MostrarCVS::class, 'showAuthenticatedUser'])->name('vistas.vistacvusuario');
+
+
+#practicas
+
+
+Route::get('/practicas/crear', [PracticasController::class, 'create'])
+     ->name('vistas.createpractricas');  // ahora coincidente con carpeta
+
+Route::post('/practicas/crear', [PracticasController::class, 'store'])
+     ->name('vistas.createpractricas.store');
