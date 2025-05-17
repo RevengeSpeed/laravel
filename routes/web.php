@@ -74,7 +74,7 @@ Route::get('/mi-cv', [MostrarCVS::class, 'showAuthenticatedUser'])->name('vistas
 
 
 Route::get('/practicas/crear', [PracticasController::class, 'create'])
-     ->name('vistas.createpractricas');  // ahora coincidente con carpeta
+     ->name('vistas.createpracticas');  // ahora coincidente con carpeta
 
 Route::post('/practicas/crear', [PracticasController::class, 'store'])
-     ->name('vistas.createpractricas.store');
+     ->name('vistas.createpracticas.store');

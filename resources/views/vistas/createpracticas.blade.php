@@ -17,7 +17,7 @@
         <div class="card w-75 shadow-lg p-4">
             <div class="card-body">
                 <h5 class="card-title text-center">Formulario de Prácticas</h5>
-                <form method="POST" action="{{ route('vistas.createpractricas.store') }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('vistas.createpracticas.store') }}" enctype="multipart/form-data">
                     @csrf
 
                     {{-- Nombre --}}
@@ -70,7 +70,7 @@
                         @error('cualidades')<div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
 
-                    {{-- Lenguajes de programación (Tagify sobre input) --}}
+                    {{--  CAMBIAR POR HABILIDADES BLANDAS O COMPETENTES --}}
                     <div class="mb-3">
                         <label for="lenguajes_programacion" class="form-label">Lenguajes de Programación</label>
                         <input name="lenguajes_programacion" id="lenguajes_programacion"
