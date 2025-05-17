@@ -1,151 +1,174 @@
-<!DOCTYPE html>
-<html lang="es">
+{{-- resources/views/vistas/informacion_usuario_cvs.blade.php --}}
+@extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        Información del egresado -
-        @if($user->formacionAcademica)
-            {{ $user->formacionAcademica->Nombre }} {{ $user->formacionAcademica->Apellido }}
-        @else
-            Sin Información
-        @endif
-    </title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-</head>
-<style>
-    body {
-        background-color: #f8f9fa;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        color: #343a40;
-    }
+@section('styles')
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #343a40;
+        }
 
-    .container {
-        max-width: 800px;
-        margin: auto;
-    }
+        .profile-card {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+        }
 
-    .card {
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        border: none;
-        border-radius: 10px;
-    }
+        .section-title {
+            margin-top: 2rem;
+            font-size: 1.5rem;
+            border-bottom: 2px solid #0d6efd;
+            padding-bottom: 0.5rem;
+        }
+    </style>
+@endsection
 
-    .card-body {
-        padding: 2rem;
-    }
+@section('content')
+    <div class="container mt-5 mb-5">
+        <h2 class="mb-4 text-center">Información del egresado</h2>
 
-    .card-title {
-        font-size: 1.8rem;
-        font-weight: 600;
-        margin-bottom: 1rem;
-    }
+        <div class="row g-4">
+            {{-- Columna izquierda: foto y datos básicos --}}
+            <div class="col-md-4">
+                <div class="card profile-card text-center p-3">
 
-    .card-text strong {
-        display: inline-block;
-        width: 150px;
-        color: #495057;
-    }
+                    @php
+                        // Elige la ruta de perfil: documento o profile_picture
+                        $perfilPath = optional($user->documento)->perfil ?: $user->profile_picture;
+                    @endphp
 
-    .user-image {
-        width: 120px;
-        height: 120px;
-        object-fit: cover;
-        border-radius: 50%;
-        border: 3px solid #0d6efd;
-        margin-bottom: 1rem;
-    }
+                    @if($perfilPath)
+                        <img src="{{ asset('storage/' . $perfilPath) }}"
+                            alt="Foto de perfil de {{ $user->formacionAcademica->Nombre ?? 'Usuario' }}"
+                            class="rounded-circle mb-3 img-fluid" style="width:120px; height:120px; object-fit:cover;">
+                    @else
+                        <div class="rounded-circle bg-secondary d-flex align-items-center justify-content-center mb-3"
+                            style="width:120px; height:120px; color:#fff;">
+                            Sin Imagen
+                        </div>
+                    @endif
 
-    .img-placeholder {
-        width: 120px;
-        height: 120px;
-        background-color: #dee2e6;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #6c757d;
-        font-size: 0.9rem;
-        margin-bottom: 1rem;
-    }
+                    @if($user->formacionAcademica)
+                        <h5 class="card-title">
+                            {{ $user->formacionAcademica->Nombre }}
+                            {{ $user->formacionAcademica->Apellido }}
+                        </h5>
+                        <p class="mb-1"><i class="fa fa-envelope me-2"></i>{{ $user->email }}</p>
+                        <p class="mb-1"><i class="fa fa-globe me-2"></i>{{ $user->formacionAcademica->Nacionalidad ?? 'N/A' }}
+                        </p>
+                        <p class="mb-1"><i class="fa fa-phone me-2"></i>{{ $user->formacionAcademica->Telefono ?? 'N/A' }}</p>
+                        <p class="mb-1"><i class="fa fa-home me-2"></i>{{ $user->formacionAcademica->Direccion ?? 'N/A' }}</p>
+                        <p class="mb-1"><i class="fa fa-venus-mars me-2"></i>{{ $user->formacionAcademica->Genero ?? 'N/A' }}
+                        </p>
+                        <p class="mb-0"><i
+                                class="fa fa-birthday-cake me-2"></i>{{ $user->formacionAcademica->FechaNacimiento ?? 'N/A' }}
+                        </p>
+                    @else
+                        <p>Información básica no disponible.</p>
+                    @endif
+                </div>
+            </div>
 
-    h5.mt-4 {
-        margin-top: 2rem !important;
-        font-size: 1.5rem;
-        border-bottom: 2px solid #0d6efd;
-        padding-bottom: 0.5rem;
-        margin-bottom: 1rem;
-    }
+            {{-- Columna derecha: formación y experiencia --}}
+            <div class="col-md-8">
+                <div class="card profile-card p-4">
+                    @if($user->formAcadem)
+                        <h2 class="section-title">
+                            <i class="fa fa-graduation-cap me-2 text-primary"></i>
+                            Formación Académica
+                        </h2>
+                        <p><strong>Nivel Educativo:</strong> {{ $user->formAcadem->nivel_educativo ?? 'N/A' }}</p>
+                        <p><strong>Institución:</strong> {{ $user->formAcadem->institucion ?? 'N/A' }}</p>
+                        <p><strong>Carrera:</strong> {{ $user->formAcadem->carrera ?? 'N/A' }}</p>
+                        <p><strong>Título:</strong> {{ $user->formAcadem->titulo ?? 'N/A' }}</p>
+                        <p><strong>Certificaciones:</strong> {{ $user->formAcadem->certificaciones ?? 'N/A' }}</p>
+                    @else
+                        <h5 class="section-title text-muted">Formación Académica no disponible</h5>
+                    @endif
 
-    .card-text {
-        margin-bottom: 0.75rem;
-    }
-</style>
+                    @if($user->experienciaLaboral)
+                        <h5 class="section-title">
+                            <i class="fa fa-briefcase me-2 text-primary"></i>
+                            Experiencia Laboral
+                        </h5>
+                        <div class="mb-3">
+                            <p class="mb-1"><strong>Puesto:</strong> {{ $user->experienciaLaboral->titulo_empleado ?? 'N/A' }}
+                            </p>
+                            <p class="mb-1"><strong>Empresa:</strong> {{ $user->experienciaLaboral->empresa_actual ?? 'N/A' }}
+                            </p>
+                            <p class="mb-1"><strong>Cargo:</strong> {{ $user->experienciaLaboral->cargo_actual ?? 'N/A' }}</p>
+                            <p class="mb-0"><strong>Responsabilidades:</strong>
+                                {{ $user->experienciaLaboral->descripcion_responsabilidades ?? 'N/A' }}</p>
+                        </div>
+                    @else
+                        <h5 class="section-title text-muted">No hay experiencia laboral</h5>
+                    @endif
 
-<body>
-    <div class="container mt-4">
-        <h2 class="mb-4">Información del egresado</h2>
-        <div class="card">
-            <div class="card-body">
-                @if($user->documento && $user->documento->perfil)
-                    <img src="{{ asset('storage/' . $user->documento->perfil) }}"
-                        alt="Foto de {{ $user->formacionAcademica->Nombre ?? 'Sin Nombre' }} {{ $user->formacionAcademica->Apellido ?? '' }}"
-                        class="user-image mb-3">
-                @elseif($user->profile_picture)
-                    <img src="{{ asset('storage/' . $user->profile_picture) }}"
-                        alt="Foto de {{ $user->formacionAcademica->Nombre ?? 'Sin Nombre' }} {{ $user->formacionAcademica->Apellido ?? '' }}"
-                        class="user-image mb-3">
-                @else
-                    <div class="img-placeholder mb-3">Sin Imagen</div>
-                @endif
+                    {{-- Habilidades --}}
+                    @if($user->habilidades)
+                        <h5 class="section-title">
+                            <i class="fa fa-lightbulb me-2 text-primary"></i>
+                            Habilidades
+                        </h5>
+                        <p><strong>Habilidades Técnicas:</strong> {{ $user->habilidades->habilidades_tecnicas ?? 'N/A' }}</p>
+                        <p><strong>Habilidades Blandas:</strong> {{ $user->habilidades->habilidades_blandas ?? 'N/A' }}</p>
+                        <p><strong>Idiomas:</strong> {{ $user->habilidades->idiomas ?? 'N/A' }}</p>
+                    @else
+                        <h5 class="section-title text-muted">Habilidades no registradas</h5>
+                    @endif
 
-                @if($user->formacionAcademica)
-                    <h5 class="card-title">{{ $user->formacionAcademica->Nombre }} {{ $user->formacionAcademica->Apellido }}
-                    </h5>
-                    <p class="card-text"><strong>Email:</strong> {{ $user->email }}</p>
-                    <p class="card-text"><strong>Nacionalidad:</strong>
-                        {{ $user->formacionAcademica->Nacionalidad ?? 'N/A' }}</p>
-                    <p class="card-text"><strong>Teléfono:</strong> {{ $user->formacionAcademica->Telefono ?? 'N/A' }}</p>
-                    <p class="card-text"><strong>Dirección:</strong> {{ $user->formacionAcademica->Direccion ?? 'N/A' }}</p>
-                    <p class="card-text"><strong>Género:</strong> {{ $user->formacionAcademica->Genero ?? 'N/A' }}</p>
-                    <p class="card-text"><strong>Fecha de Nacimiento:</strong>
-                        {{ $user->formacionAcademica->FechaNacimiento ?? 'N/A' }}</p>
-                @else
-                    <p class="card-text">Información de formación académica no disponible.</p>
-                @endif
+                    {{-- Documentos --}}
+                    @if($user->documento)
+                        <h5 class="section-title">
+                            <i class="fa fa-folder-open me-2 text-primary"></i>
+                            Documentos
+                        </h5>
+                        @if($user->documento && $user->documento->titulo)
+                            <p><strong>Título:</strong>
+                                <a href="{{ asset('storage/' . $user->documento->titulo) }}" target="_blank">
+                                    Ver Titulo
+                                </a>
+                            </p>
+                        @else
+                            <p><strong>Título:</strong> No disponible</p>
+                        @endif
 
-                @if($user->formAcadem)
-                    <h5 class="mt-4">Formación Académica</h5>
-                    <p class="card-text"><strong>Nivel Educativo:</strong> {{ $user->formAcadem->nivel_educativo ?? 'N/A' }}
-                    </p>
-                    <p class="card-text"><strong>Institución:</strong> {{ $user->formAcadem->institucion ?? 'N/A' }}</p>
-                    <p class="card-text"><strong>Carrera:</strong> {{ $user->formAcadem->carrera ?? 'N/A' }}</p>
-                    <p class="card-text"><strong>Título:</strong> {{ $user->formAcadem->titulo ?? 'N/A' }}</p>
-                    <p class="card-text"><strong>Certificaciones:</strong> {{ $user->formAcadem->certificaciones ?? 'N/A' }}
-                    </p>
-                @else
-                    <p class="card-text">Información de formación académica no disponible.</p>
-                @endif
 
-                @if($user->experienciaLaboral->count() > 0)
-                    <h5 class="mt-4">Experiencia Laboral</h5>
-                    @foreach($user->experienciaLaboral as $experiencia)
-                        <p class="card-text"><strong>Título Empleado:</strong> {{ $experiencia->titulo_empleado ?? 'N/A' }}</p>
-                        <p class="card-text"><strong>Empresa Actual:</strong> {{ $experiencia->empresa_actual ?? 'N/A' }}</p>
-                        <p class="card-text"><strong>Cargo Actual:</strong> {{ $experiencia->cargo_actual ?? 'N/A' }}</p>
-                        <p class="card-text"><strong>Descripción Responsabilidades:</strong>
-                            {{ $experiencia->descripcion_responsabilidades ?? 'N/A' }}</p>
-                    @endforeach
-                @else
-                    <p class="card-text">No hay experiencia laboral disponible.</p>
-                @endif
+                        @if($user->documento->certificados && is_array($user->documento->certificados))
+                            <p><strong>Certificados:</strong></p>
+                            <ul>
+                                @foreach($user->documento->certificados as $cert)
+                                    <li>
+                                        <a href="{{ asset('storage/' . $cert) }}" target="_blank">Ver Certificado</a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        @endif
+
+                        @if($user->documento->certificados_externos && is_array($user->documento->certificados_externos))
+                            <p><strong>Certificados Externos:</strong></p>
+                            <ul>
+                                @foreach($user->documento->certificados_externos as $cert_ext)
+                                    <li>
+                                        <a href="{{ asset('storage/' . $cert_ext) }}" target="_blank">Ver Certificado Externo</a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        @endif
+                    @else
+                        <h5 class="section-title text-muted">Documentos no disponibles</h5>
+                    @endif
+
+                </div>
             </div>
         </div>
+
+        <div class="mt-4">
+            <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary">
+                <i class="fa fa-arrow-left me-1"></i> Volver al Dashboard
+            </a>
+        </div>
     </div>
-    <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary mb-3">⬅ Volver al Dashboard</a>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-
-</html>
+@endsection

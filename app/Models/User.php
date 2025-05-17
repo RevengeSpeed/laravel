@@ -35,7 +35,7 @@ class User extends Authenticatable
 
     public function experienciaLaboral()
     {
-        return $this->hasMany(ExperienciaLaboral::class, 'user_id');
+        return $this->hasOne(ExperienciaLaboral::class, 'user_id');
     }
 
     /**
