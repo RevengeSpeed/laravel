@@ -9,7 +9,7 @@ class MostrarPracticas extends Model
 {
     use HasFactory;
 
-    protected $table = 'practicas'; // Indicamos que se usará la tabla 'practicas'
+    protected $table = 'practica'; // Indicamos que se usará la tabla 'practicas'
 
     protected $fillable = [
         'nombre',

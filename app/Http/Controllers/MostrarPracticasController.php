@@ -13,7 +13,7 @@ class MostrarPracticasController extends Controller
 
         if (!empty($query)) {
             $practicas = MostrarPracticas::where('cualidades', 'like', "%{$query}%")
-                ->orWhere('lenguajes_programacion', 'like', "%{$query}%")
+                ->orWhere('habilidades_blandas', 'like', "%{$query}%")
                 ->get();
         } else {
             $practicas = MostrarPracticas::all();
@@ -22,8 +22,10 @@ class MostrarPracticasController extends Controller
         return view('vistas.practicas', compact('practicas', 'query'));
     }
 
-     public function show($id)
+
+    public function show($id)
     {
         $practica = MostrarPracticas::findOrFail($id);
-return view('vistas.InformacionUsuarioPracticas', compact('practica'));    }
+        return view('vistas.InformacionUsuarioPracticas', compact('practica'));
+    }
 }

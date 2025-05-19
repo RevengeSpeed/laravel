@@ -74,3 +74,8 @@ Route::get(
 )->name('vistas.practicas');
 
 Route::get('vistas/practicas/{id}', [PracticaController::class, 'show'])->name('vistas.practicas.show');
+
+
+#mostrar practicas
+Route::get('/practicas', [MostrarPracticasController::class, 'index'])->name('vistas.practicas');
+Route::get('/practicas/{id}', [MostrarPracticasController::class, 'show'])->name('vistas.informacionpracticas');
