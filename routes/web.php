@@ -9,7 +9,7 @@ use App\Http\Controllers\{
     AdminController,
     HabilidadesController,
     DocumentoController,
-    PracticasController,
+    PracticaController,
     PerfilController,
     MostrarPracticasController
 };
@@ -51,9 +51,6 @@ Route::get('/documentos', [DocumentoController::class, 'index'])->name('document
 Route::get('/documentos/create', [DocumentoController::class, 'create'])->name('documentos.create');
 Route::post('/documentos', [DocumentoController::class, 'store'])->name('documentos.store');
 
-// Prácticas
-Route::get('/practicas/crear', [PracticasController::class, 'create'])->name('vistas.createpracticas');
-Route::post('/practicas/crear', [PracticasController::class, 'store'])->name('vistas.createpracticas.store');
 
 
 //editar perfil
@@ -65,6 +62,15 @@ Route::middleware(['auth'])->group(function () {
 });
 
 
-#mostrar practicas
-Route::get('/practicas', [App\Http\Controllers\MostrarPracticasController::class, 'index'])->name('vistas.practicas');
-Route::get('/perfil/{id}', [MostrarPracticasController::class, 'show'])->name('vistas.informacionUsuarioPracticas');
+// Prácticas
+Route::get('vistas/createpracticas', [PracticaController::class, 'create'])
+    ->name('vistas.createpracticas');          // ← aquí quitas el sufijo “.create”
+
+Route::post('vistas/createpracticas', [PracticaController::class, 'store'])
+    ->name('vistas.createpracticas.store');
+Route::get(
+    'vistas/practicas',
+    [PracticaController::class, 'index']
+)->name('vistas.practicas');
+
+Route::get('vistas/practicas/{id}', [PracticaController::class, 'show'])->name('vistas.practicas.show');

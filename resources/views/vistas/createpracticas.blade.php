@@ -8,8 +8,7 @@
             }
         }
     </style>
-    <!-- Tagify CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/@yaireo/tagify/dist/tagify.css">
+    
 @endsection
 
 @section('content')
@@ -44,22 +43,6 @@
                             class="form-control @error('fecha_inicio_universidad') is-invalid @enderror"
                             value="{{ old('fecha_inicio_universidad') }}" required>
                         @error('fecha_inicio_universidad')<div class="invalid-feedback">{{ $message }}</div>@enderror
-                    </div>
-
-                    {{-- Materias reprobadas --}}
-                    <div class="form-check mb-3">
-                        <input type="checkbox" name="tiene_reprobadas" id="tiene_reprobadas" value="1"
-                            class="form-check-input" {{ old('tiene_reprobadas') ? 'checked' : '' }}>
-                        <label class="form-check-label" for="tiene_reprobadas">¿Tiene materias reprobadas?</label>
-                    </div>
-
-                    {{-- Número de reprobadas (oculto por defecto) --}}
-                    <div class="mb-3" id="cantidad_reprobadas_group" style="display: none;">
-                        <label for="cantidad_reprobadas" class="form-label">¿Cuántas materias reprobadas?</label>
-                        <input type="number" min="1" name="cantidad_reprobadas" id="cantidad_reprobadas"
-                            class="form-control @error('cantidad_reprobadas') is-invalid @enderror"
-                            value="{{ old('cantidad_reprobadas') }}">
-                        @error('cantidad_reprobadas')<div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
 
                     {{-- Cualidades --}}
@@ -103,27 +86,3 @@
     </div>
 @endsection
 
-@push('scripts')
-    <!-- Tagify JS -->
-    <script src="https://unpkg.com/@yaireo/tagify"></script>
-    <script>
-        // Inicializar Tagify sobre el <select multiple>
-        var select = document.querySelector('#habilidades_blandas');
-        new Tagify(select, {
-            whitelist: [],       // puede llenarse con sugerencias si quieres
-            dropdown: {
-                enabled: 0,
-                position: 'text'
-            }
-        });
-
-        // Mostrar/ocultar campo de cantidad de reprobadas
-        const chk = document.querySelector('#tiene_reprobadas');
-        const grp = document.getElementById('cantidad_reprobadas_group');
-        chk.addEventListener('change', () => {
-            grp.style.display = chk.checked ? 'block' : 'none';
-        });
-        // Si vuelve con old valor
-        if (chk.checked) grp.style.display = 'block';
-    </script>
-@endpush
