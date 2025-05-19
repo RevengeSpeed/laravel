@@ -11,6 +11,8 @@ use App\Http\Controllers\HabilidadesController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DocumentoController;
 use App\Http\Controllers\PracticasController;
+use App\Http\Controllers\MostrarPracticasController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -78,3 +80,7 @@ Route::get('/practicas/crear', [PracticasController::class, 'create'])
 
 Route::post('/practicas/crear', [PracticasController::class, 'store'])
      ->name('vistas.createpracticas.store');
+
+#mostrar practicas
+Route::get('/practicas', [App\Http\Controllers\MostrarPracticasController::class, 'index'])->name('vistas.practicas');
+Route::get('/perfil/{id}', [MostrarPracticasController::class, 'show'])->name('vistas.informacionUsuarioPracticas');

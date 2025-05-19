@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class PracticasController extends Controller
 {
+
     /**
      * Mostrar el formulario de prácticas.
      */
@@ -21,16 +22,16 @@ class PracticasController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'nombre'                        => 'required|string|max:100',
-            'apellidos'                     => 'required|string|max:100',
-            'fecha_inicio_universidad'      => 'required|date',
-            'tiene_reprobadas'              => 'sometimes|boolean',
-            'cantidad_reprobadas'           => 'required_if:tiene_reprobadas,1|integer|min:1',
-            'cualidades'                    => 'nullable|string',
-            'lenguajes_programacion'        => 'nullable|array',
-            'lenguajes_programacion.*'      => 'string|max:50',
-            'certificados'                  => 'nullable|array',
-            'certificados.*'                => 'file|mimes:pdf,jpg,png|max:2048',
+            'nombre' => 'required|string|max:100',
+            'apellidos' => 'required|string|max:100',
+            'fecha_inicio_universidad' => 'required|date',
+            'tiene_reprobadas' => 'sometimes|boolean',
+            'cantidad_reprobadas' => 'required_if:tiene_reprobadas,1|integer|min:1',
+            'cualidades' => 'nullable|string',
+            'lenguajes_programacion' => 'nullable|array',
+            'lenguajes_programacion.*' => 'string|max:50',
+            'certificados' => 'nullable|array',
+            'certificados.*' => 'file|mimes:pdf,jpg,png|max:2048',
         ]);
 
         // Si no marcó reprobadas, aseguramos cantidad = 0

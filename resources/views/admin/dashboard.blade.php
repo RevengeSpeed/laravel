@@ -18,7 +18,10 @@
                     <div class="text-center">
                         <h3>{{ __('Bienvenido!') }}</h3>
                         <a href="{{ route('vistas.MostrarCVS') }}">
-                            <button type="button" class="btn btn-primary">Mirar CVS</button>
+                            <button type="button" class="btn btn-primary me-3">Mirar CVS</button>
+                        </a>
+                         <a href="{{ route('vistas.practicas') }}">
+                            <button type="button" class="btn btn-primary">Mirar practicantes</button>
                         </a>
                     </div>
 

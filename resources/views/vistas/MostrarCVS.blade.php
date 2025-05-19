@@ -13,28 +13,44 @@
     @if(isset($habilidades) && $habilidades->isNotEmpty())
         <h4>Resultados de la búsqueda:</h4>
         <div class="row">
-            @foreach ($habilidades as $h)
-                <div class="col-md-4">
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            {{-- Habilidades Técnicas --}}
-                            @if(! empty($h->habilidades_tecnicas))
-                                <h5 class="card-title">Habilidades Técnicas: {{ $h->habilidades_tecnicas }}</h5>
-                            @endif
+           @foreach ($habilidades as $h)
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body">
 
-                            {{-- Habilidades Blandas --}}
-                            @if(! empty($h->habilidades_blandas))
-                                <p class="card-text"><strong>Blandas:</strong> {{ $h->habilidades_blandas }}</p>
-                            @endif
+                {{-- Nombre completo --}}
+                @if($h->user && $h->user->formacionacademica)
+                    <h5 class="card-title mt-2">
+                        {{ trim($h->user->formacionacademica->Nombre . ' ' . $h->user->formacionacademica->Apellido) }}
+                    </h5>
+                @endif
 
-                            {{-- Idiomas --}}
-                            @if(! empty($h->idiomas))
-                                <p class="card-text"><strong>Idiomas:</strong> {{ $h->idiomas }}</p>
-                            @endif
-                        </div>
-                    </div>
-                </div>
-            @endforeach
+                {{-- Habilidades Técnicas --}}
+                @if(! empty($h->habilidades_tecnicas))
+                    <p class="card-text"><strong>Habilidades Técnicas:</strong> {{ $h->habilidades_tecnicas }}</p>
+                @endif
+
+                {{-- Habilidades Blandas --}}
+                @if(! empty($h->habilidades_blandas))
+                    <p class="card-text"><strong>Blandas:</strong> {{ $h->habilidades_blandas }}</p>
+                @endif
+
+                {{-- Idiomas --}}
+                @if(! empty($h->idiomas))
+                    <p class="card-text"><strong>Idiomas:</strong> {{ $h->idiomas }}</p>
+                @endif
+
+                {{-- Botón --}}
+                @if($h->user)
+                    <a href="{{ route('vistas.InformacionUsuarioCVS', $h->user->id) }}"
+                       class="btn btn-primary">
+                        Mostrar toda la información
+                    </a>
+                @endif
+            </div>
+        </div>
+    </div>
+@endforeach
         </div>
     @else
         <h4>Lista de Usuarios:</h4>

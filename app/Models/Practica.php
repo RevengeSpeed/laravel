@@ -1,8 +1,10 @@
 <?php
+namespace App\Models;
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+
 
 return new class extends Migration
 {
@@ -41,4 +43,10 @@ return new class extends Migration
     {
         Schema::dropIfExists('practicas');
     }
+
+    public function user()
+        {
+            return $this->belongsTo(User::class, 'user_id');
+        }
+    
 };
