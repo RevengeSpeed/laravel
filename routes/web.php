@@ -10,7 +10,8 @@ use App\Http\Controllers\{
     HabilidadesController,
     DocumentoController,
     PracticasController,
-    PerfilController
+    PerfilController,
+    MostrarPracticasController
 };
 
 Route::get('/', function () {
@@ -62,3 +63,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/perfil', [PerfilController::class, 'show'])->name('perfil.show');
 
 });
+
+
+#mostrar practicas
+Route::get('/practicas', [App\Http\Controllers\MostrarPracticasController::class, 'index'])->name('vistas.practicas');
+Route::get('/perfil/{id}', [MostrarPracticasController::class, 'show'])->name('vistas.informacionUsuarioPracticas');

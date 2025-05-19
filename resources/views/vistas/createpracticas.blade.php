@@ -70,35 +70,36 @@
                         @error('cualidades')<div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
 
-                    {{--  CAMBIAR POR HABILIDADES BLANDAS O COMPETENTES --}}
+                    {{-- CAMBIAR POR HABILIDADES BLANDAS O COMPETENTES --}}
                     <div class="mb-3">
-                        <label for="lenguajes_programacion" class="form-label">Lenguajes de Programación</label>
-                        <input name="lenguajes_programacion" id="lenguajes_programacion"
-                            class="form-control @error('lenguajes_programacion') is-invalid @enderror"
-                            value="{{ old('lenguajes_programacion') }}" placeholder="Escribe un lenguaje y presiona Enter"
-                            autocomplete="off">
-                        @error('lenguajes_programacion')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-
-                    {{-- Subir certificados --}}
-                    <div class="mb-3">
-                        <label for="certificados" class="form-label">Subir Certificados (PDF, JPG, PNG)</label>
-                        <input type="file" name="certificados[]" id="certificados" multiple
-                            class="form-control @error('certificados') is-invalid @enderror">
-                        @error('certificados')<div class="invalid-feedback">{{ $message }}</div>@enderror
-                    </div>
-
-                    {{-- Botón de envío --}}
-                    <button type="submit" class="btn btn-primary btn-block mt-3">Enviar Práctica</button>
-                </form>
-
-                @if(session('status'))
-                    <div class="alert alert-success mt-3">{{ session('status') }}</div>
-                @endif
+                    <label for="habilidades_blandas" class="form-label">Habilidades blandas <small>(separadas por
+                            comas)</small></label>
+                    <textarea name="habilidades_blandas" id="habilidades_blandas" rows="3"
+                        class="form-control @error('habilidades_blandas') is-invalid @enderror"
+                        placeholder="Ej: Comunicación, Liderazgo, Trabajo en equipo">{{ old('habilidades_blandas') }}</textarea>
+                    @error('habilidades_blandas')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
             </div>
+
+
+            {{-- Subir certificados --}}
+            <div class="mb-3">
+                <label for="certificados" class="form-label">Subir Certificados (PDF, JPG, PNG)</label>
+                <input type="file" name="certificados[]" id="certificados" multiple
+                    class="form-control @error('certificados') is-invalid @enderror">
+                @error('certificados')<div class="invalid-feedback">{{ $message }}</div>@enderror
+            </div>
+
+            {{-- Botón de envío --}}
+            <button type="submit" class="btn btn-primary btn-block mt-3">Enviar Práctica</button>
+            </form>
+
+            @if(session('status'))
+                <div class="alert alert-success mt-3">{{ session('status') }}</div>
+            @endif
         </div>
+    </div>
     </div>
 @endsection
 
@@ -107,7 +108,7 @@
     <script src="https://unpkg.com/@yaireo/tagify"></script>
     <script>
         // Inicializar Tagify sobre el <select multiple>
-        var select = document.querySelector('#lenguajes_programacion');
+        var select = document.querySelector('#habilidades_blandas');
         new Tagify(select, {
             whitelist: [],       // puede llenarse con sugerencias si quieres
             dropdown: {
